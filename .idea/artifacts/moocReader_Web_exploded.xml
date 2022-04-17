@@ -26,6 +26,16 @@
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.6" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.28" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-annotation:3.5.1" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-core:3.5.1" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-extension:3.5.1" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus:3.5.1" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:4.3" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.9" />
+          <element id="library" level="project" name="Maven: com.github.penggle:kaptcha:2.3.2" />
+          <element id="library" level="project" name="Maven: com.jhlabs:filters:2.0.235-1" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
         </element>
       </element>
     </root>

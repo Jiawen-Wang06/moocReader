@@ -19,6 +19,11 @@
     <context:component-scan base-package="per.mooc"/>
     <mvc:annotation-driven>
         <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="per.mooc.reader.config.CustomObjectMapper"/>
+                </property>
+            </bean>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
@@ -50,7 +55,7 @@
     <bean id="sessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:mappers/*.xml"/>
-        <property name="configLocation" value="mybatis-config.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <property name="plugins">
             <array>
                 <bean class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
@@ -73,5 +78,21 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--Keptcha configuration-->
+    <bean id="kaptchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">no</prop>
+                        <prop key="kaptcha.image.width">120</prop>
+                        <prop key="kaptcha.textproducer.font.color">blue</prop>
+                        <prop key="kaptcha.textproducer.font.size">40</prop>
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
 
 </beans>
