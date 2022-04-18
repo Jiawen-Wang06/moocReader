@@ -11,6 +11,7 @@ import per.mooc.reader.mapper.BookMapper;
 import per.mooc.reader.service.BookService;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @author Jiawen
@@ -45,5 +46,16 @@ public class BookServiceImpl implements BookService {
     public Book selectById(Long BookId){
         Book bk = bookMapper.selectById(BookId);
        return bk;
+    }
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateScore() {
+        bookMapper.updateScore();
+    }
+    @Override
+    public IPage<Map> selectBookMap(Integer page, Integer rows) {
+        IPage p = new Page(page,rows);
+        p = bookMapper.selectBookMap(p);
+        return p;
     }
 }

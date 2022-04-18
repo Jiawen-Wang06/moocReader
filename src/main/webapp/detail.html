@@ -197,8 +197,27 @@
             }
         }
         , methods: {
+            showEvaluationList:function (bookId,isFlusth) {
+                const objApp = this;
+                const reviewUri = "/api/evaluation/list?bookId="+bookId;
+                axios.get(reviewUri).then(function (response) {
+                    const json = response.data;
+                    if(json.code == "0"){
+                        if(isFlusth){
+                            objApp.evaluationList.splice(0,objApp.evaluationList.length);
+                        }
+                        const list = json.data.list;
+                        list.forEach(function (item) {
+                            item.ct = formatDate(item.create_time);
+                            objApp.evaluationList.push(item);
+                        })
+                    }else{
+                        console.error(json);
+                    }
+                });
+            }
             //显示短评对话框
-            showDialog: function () {
+            ,showDialog: function () {
                 const objApp = this;
                 if (!objApp.state.isLogin) {
                     warnLogin("登录后才能进行评论哦");
@@ -240,12 +259,50 @@
                 //提交短评功能
                 const form = this.$refs[formName];
                 const objApp = this;
+                const memberId = sessionStorage.mid;
+                const bookId = getQueryString("bid");
                 form.validate().then(function(){
+                    const params  = new URLSearchParams();
+                    params.append("memberId",memberId);
+                    params.append("bookId",bookId);
+                    params.append("score",objApp.form.score);
+                    params.append("content",objApp.form.content);
+                    axios.post("/api/member/evaluate",params)
+                        .then(function (response) {
+                            const json = response.data;
+                            if(json.code == "0"){
+                                objApp.state.dialogVisible = false;
+                                objApp.form.score = 5;
+                                objApp.form.content = "";
+                                objApp.showEvaluationList(bookId,true);
+                            }else{
+
+                            }
+                        })
 
                 }).catch(function(e){console.debug("表单验证失败",e)});
             }
             , enjoy: function (index) {
                 //点赞功能
+                const memberId = sessionStorage.mid;
+                const objApp = this;
+                if(!objApp.state.isLogin){
+                    warnLogin("请先登录哟！");
+                    return;
+                }else{
+                   const review = objApp.evaluationList[index];
+                   const params = new URLSearchParams();
+                   params.append("evaluationId",review.evaluation_id);
+                   axios.post("/api/member/enjoy",params)
+                       .then(function (response) {
+                           const json = response.data;
+                           if (json.code == "0"){
+                               review.enjoy = json.data.evaluate.enjoy;
+                           }else{
+
+                           }
+                       })
+                }
             }
         }
         , mounted() {
@@ -266,19 +323,7 @@
                 }
             })
 
-            const reviewUri = "/api/evaluation/list?bookId="+bookId;
-            axios.get(reviewUri).then(function (response) {
-                const json = response.data;
-                if(json.code == "0"){
-                    const list = json.data.list;
-                    list.forEach(function (item) {
-                        item.ct = formatDate(item.create_time);
-                        objApp.evaluationList.push(item);
-                    })
-                }else{
-                    console.error(json);
-                }
-            });
+            objApp.showEvaluationList(bookId,false);
             const mid = sessionStorage.mid;
             if(mid != null){
                 axios.get("/api/member/select_by_id?memberId="+mid)

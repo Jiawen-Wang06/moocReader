@@ -1,11 +1,11 @@
 package per.mooc.reader.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import per.mooc.reader.entity.Evaluation;
 import per.mooc.reader.entity.Member;
 import per.mooc.reader.entity.MemberReadState;
+import per.mooc.reader.service.EvaluationService;
 import per.mooc.reader.service.MemberService;
 import per.mooc.reader.utils.ResponseUtils;
 
@@ -19,6 +19,8 @@ import java.security.SecureRandom;
 public class MemberController {
     @Resource
     private MemberService memberService;
+    @Resource
+    private EvaluationService evaluationService;
     @PostMapping("/register")
     public ResponseUtils register(String username, String password, String nickname, String vc, HttpServletRequest request){
         ResponseUtils resp = null;
@@ -98,6 +100,30 @@ public class MemberController {
         return resp;
     }
 
+   @PostMapping("/evaluate")
+    public ResponseUtils evaluate(Long memberId, Long bookId, Integer score, String content){
+       ResponseUtils resp = null;
+        try {
+           Evaluation e = evaluationService.evaluate(memberId,bookId,score,content);
+           resp = new ResponseUtils().put("evaluate",e);
+       } catch (Exception e) {
+           e.printStackTrace();
+           resp = new ResponseUtils(e.getClass().getSimpleName(),e.getMessage());
+       }
+        return resp;
+   }
 
+   @PostMapping("/enjoy")
+   public ResponseUtils enjoy(Long evaluationId){
+       ResponseUtils resp = null;
+       try {
+           Evaluation e = evaluationService.enjoy(evaluationId);
+           resp = new ResponseUtils().put("evaluate",e);
+       } catch (Exception e) {
+           e.printStackTrace();
+           resp = new ResponseUtils(e.getClass().getSimpleName(),e.getMessage());
+       }
+       return resp;
+   }
 
 }

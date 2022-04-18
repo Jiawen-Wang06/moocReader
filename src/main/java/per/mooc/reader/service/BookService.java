@@ -3,6 +3,8 @@ package per.mooc.reader.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import per.mooc.reader.entity.Book;
 
+import java.util.Map;
+
 /**
  * @author Jiawen
  */
@@ -17,4 +19,6 @@ public interface BookService {
      */
     public IPage<Book> selectPage(Long categoryId, String order, Integer page, Integer rows);
     public Book selectById(Long bookId);
+    public void updateScore();
+    public IPage<Map> selectBookMap(Integer page, Integer rows);
 }
