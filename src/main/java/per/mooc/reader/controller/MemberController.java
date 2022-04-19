@@ -37,7 +37,7 @@ public class MemberController {
             }
 
         }
-        System.out.println(resp);
+
         return resp;
 
     }

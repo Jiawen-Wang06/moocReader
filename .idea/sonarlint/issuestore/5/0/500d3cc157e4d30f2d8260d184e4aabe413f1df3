@@ -1,0 +1,10 @@
+
+p
+java:S1488I"ZImmediately return this expression instead of assigning it to the temporary variable "mr".(øêº»
+S	java:S106#"9Replace this use of System.out or System.err by a logger.(¼úÅ°ÿÿÿÿÿ
+T
+java:S1155$">Use isEmpty() to check whether the collection is empty or not.(¾Ğ¥
+4
+java:S2119+"Save and re-use this "Random".(šá±Â
+\
+java:S1128"@Remove this unused import 'per.mooc.reader.utils.ResponseUtils'.(ÚÂÛ}8™ñ¹Æƒ0
