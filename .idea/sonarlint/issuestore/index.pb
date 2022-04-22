@@ -83,8 +83,6 @@ p
 @src/test/java/per/mooc/reader/service/CategoryServiceTestor.java,9\3\932bcfcad30c032841aaed447ec4155561027557
 d
 4src/main/java/per/mooc/reader/entity/Evaluation.java,6\8\68c04550f29b3edec751c4129f371f258457e1ee
-l
-<src/main/java/per/mooc/reader/controller/BookController.java,a\d\adf69a1ca9dca3f55d4f2a57f1a882c6d100d036
 [
 +.idea/artifacts/moocReader_Web_exploded.xml,7\9\79c4e222f175a6791fd5fb7a2fbbd6cd79dd85d6
 S
@@ -115,8 +113,6 @@ f
 6src/main/java/per/mooc/reader/service/BookService.java,0\3\032da4b4e68ef8b94ba504f90bf75f7742757502
 n
 >src/main/java/per/mooc/reader/controller/MemberController.java,b\8\b884e901cd98a706e86f55fe4f0cd80f0cc955e5
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 o
 ?src/main/java/per/mooc/reader/service/impl/BookServiceImpl.java,0\c\0c5ac388780307e279f9923de59d8ece87f26dfe
 J
